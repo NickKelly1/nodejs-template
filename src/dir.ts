@@ -6,7 +6,7 @@ import path from 'path';
  * @param segs
  * @returns
  */
-export const DIR_ROOT = (...segs: string[]): string => path.normalize(path.join(__dirname, '..', ...segs));
+export const DIR_ROOT = (...segs: string[]): string => path.normalize(path.join(process.cwd(), ...segs));
 
 /**
  * Get a file from src
