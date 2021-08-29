@@ -25,12 +25,15 @@ export function boot(): void {
     'uncaughtException',
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     function handleUnhandledRejection(err) {
-      // logger will log the error to console & file
-
       // you may put telemetry stuff like Sentry here
 
-      // eslint-disable-next-line no-process-exit
-      process.exit(1);
+      // log and then exit
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      logger.error(err as any, () => {
+        // eslint-disable-next-line no-process-exit
+        process.exit(1);
+      });
     }
   );
 

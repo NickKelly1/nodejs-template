@@ -1,8 +1,8 @@
-import dotenv from 'dotenv';
+import { config } from 'dotenv';
 import { boolean, key, parse, string } from '@nkp/config';
 import { DIR_ROOT } from './dir';
 
-dotenv.config({ path: DIR_ROOT('.env'), });
+config({ path: DIR_ROOT('.env'), });
 
 interface IEnv {
   LOGS_COMPRESS: boolean

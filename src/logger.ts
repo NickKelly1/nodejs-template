@@ -66,7 +66,7 @@ export const logger = winston.createLogger({
       format: nocolorFormat,
       maxSize: Env.LOGS_MAX_SIZE,
       maxFiles: Env.LOGS_ROTATION_MAX_AGE,
-      handleExceptions: false,
+      handleExceptions: false, // handle manually
     }),
 
     // error file
@@ -79,14 +79,14 @@ export const logger = winston.createLogger({
       format: nocolorFormat,
       maxSize: Env.LOGS_MAX_SIZE,
       maxFiles: Env.LOGS_ROTATION_MAX_AGE,
-      handleExceptions: true,
+      handleExceptions: false, // handle manually
     }),
 
     // console
     new winston.transports.Console({
       level: 'debug',
       format: colorFormat,
-      handleExceptions: true,
+      handleExceptions: false, // handle manually
     }),
   ],
 });
@@ -140,8 +140,9 @@ export function unknownToString(unknown: unknown, color: boolean): string {
     case 'undefined':
       return String(unknown);
     case 'object':
+    case 'function':
       if (unknown === null) return String(null);
-      return inspect(unknown, false, 5, color);
+      return inspect(unknown, false, 10, color);
     default:
       return String(unknown);
     }
