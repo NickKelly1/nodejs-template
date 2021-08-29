@@ -145,10 +145,11 @@ export function unknownToString(unknown: unknown, color: boolean): string {
     default:
       return String(unknown);
     }
-  } catch (err) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (err: any) {
     try {
       return String(unknown);
-    } catch {
+    } catch (err2: unknown) {
       if (err && typeof err.message === 'string') {
         return `Error: failed to print object. ${err.message}`;
       }
