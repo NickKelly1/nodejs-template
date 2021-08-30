@@ -27,10 +27,6 @@ const config = {
   extends: [
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:import/errors',
-    'plugin:import/warnings',
-    'plugin:import/typescript',
-    'node',
     'eslint:recommended',
   ],
   'parser': '@typescript-eslint/parser',
@@ -56,19 +52,16 @@ const config = {
     },],
     'prefer-arrow-callback': ['off',],
     'max-len': ['error', { code: 120, },],
-    'import/prefer-default-export': ['off',], // named exports
+    'eqeqeq': ['error', 'smart',],
+    'no-trailing-spaces': ['error',],
     'no-unused-vars': ['off',], // favour typescript's no-unused-vars
     'no-undef': ['off',], // favour typescript
     'no-redeclare': ['off',], // favour typescript
     'no-dupe-class-members': ['off',], // favour typescript
-    'eqeqeq': ['error', 'smart',],
-    'no-trailing-spaces': ['error',],
     '@typescript-eslint/ban-ts-comment': ['off',],
     '@typescript-eslint/no-non-null-assertion': ['off',],
     '@typescript-eslint/no-this-alias': ['off',],
   },
 };
 
-
-// eslint-disable-next-line import/no-commonjs
 module.exports = config;
