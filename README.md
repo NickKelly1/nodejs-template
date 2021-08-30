@@ -2,8 +2,8 @@
 
 Batteries included template for NodeJS projects
 
-## ___PROJECT_NAME___
+## ---PROJECT-NAME---
 
-![Known Vulnerabilities](https://snyk.io/test/github/___GITHUB_PROJECT___/badge.svg)
+![Known Vulnerabilities](https://snyk.io/test/github/---GITHUB-PROJECT---/badge.svg)
 
-___PROJECT_DESCRIPTION___
+---PROJECT-DESCRIPTION---

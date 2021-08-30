@@ -13,8 +13,8 @@ const options = {
   external: /node_modules/,
   output: [
     {
-      interop: 'auto',
       file: packageJson.main,
+      interop: 'auto',
       format: 'cjs',
       sourcemap: true,
     },

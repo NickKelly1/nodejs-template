@@ -1,4 +1,5 @@
 {
+  "window.title": "---PROJECT-NAME---",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },

@@ -19,7 +19,7 @@ const config = {
   env: {
     // chose which are appropriate
     'browser': false,
-    'node': false,
+    'node': true,
 
     'es2021': true,
     'jest': true,
@@ -30,7 +30,6 @@ const config = {
     'plugin:import/errors',
     'plugin:import/warnings',
     'plugin:import/typescript',
-    // 'plugin:import/named',
     'node',
     'eslint:recommended',
   ],
@@ -58,12 +57,10 @@ const config = {
     'prefer-arrow-callback': ['off',],
     'max-len': ['error', { code: 120, },],
     'import/prefer-default-export': ['off',], // named exports
-
     'no-unused-vars': ['off',], // favour typescript's no-unused-vars
     'no-undef': ['off',], // favour typescript
     'no-redeclare': ['off',], // favour typescript
     'no-dupe-class-members': ['off',], // favour typescript
-
     'eqeqeq': ['error', 'smart',],
     'no-trailing-spaces': ['error',],
     '@typescript-eslint/ban-ts-comment': ['off',],
