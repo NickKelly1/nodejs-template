@@ -9,22 +9,6 @@ import path from 'path';
 export const DIR_ROOT = (...segs: string[]): string => path.normalize(path.join(process.cwd(), ...segs));
 
 /**
- * Get a file from src
- *
- * @param segs
- * @returns
- */
-export const DIR_SRC = (...segs: string[]): string => DIR_ROOT('src', ...segs);
-
-/**
- * Get a file from dist
- *
- * @param segs
- * @returns
- */
-export const DIR_DIST = (...segs: string[]): string => DIR_ROOT('dist', ...segs);
-
-/**
  * Get a file from storage
  *
  * @param segs
