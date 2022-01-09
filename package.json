@@ -58,7 +58,6 @@
     "@nkp/config": "0.0.18",
     "chalk": "^5.0.0",
     "dotenv": "^10.0.0",
-    "source-map-support": "^0.5.21",
     "winston": "^3.3.3",
     "winston-daily-rotate-file": "^4.5.5"
   }
