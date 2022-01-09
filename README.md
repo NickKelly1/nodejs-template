@@ -10,6 +10,6 @@ Features:
 
 ## ---PROJECT-NAME---
 
-![Known Vulnerabilities](https://snyk.io/test/github/---GITHUB-PROJECT---/badge.svg)
+[![Known Vulnerabilities](https://snyk.io/test/github/---GITHUB-PROJECT---/badge.svg)](https://snyk.io/test/github/---GITHUB-PROJECT---)
 
 ---PROJECT-DESCRIPTION---
