@@ -11,6 +11,7 @@ const config = {
     {
       files: ['*.js', '*.jsx',],
       'rules': {
+        'indent': ['error', 2, ],
         // doesn't work on .js files
         '@typescript-eslint/explicit-module-boundary-types': ['off',],
       },
@@ -20,8 +21,6 @@ const config = {
     // chose which are appropriate
     'browser': false,
     'node': true,
-
-    'es2021': true,
     'jest': true,
   },
   extends: [
@@ -41,10 +40,10 @@ const config = {
     '@typescript-eslint',
   ],
   rules: {
-    'indent': ['error', 2, ],
+    indent: ['off',],
     'linebreak-style': ['error', 'unix',],
-    'quotes': ['error', 'single',],
-    'semi': ['error', 'always',],
+    quotes: ['error', 'single',],
+    semi: ['error', 'always',],
     'comma-dangle': ['error', {
       'functions': 'only-multiline',
       'objects': 'always',
@@ -52,7 +51,7 @@ const config = {
     },],
     'prefer-arrow-callback': ['off',],
     'max-len': ['error', { code: 120, },],
-    'eqeqeq': ['error', 'smart',],
+    eqeqeq: ['error', 'smart',],
     'no-trailing-spaces': ['error',],
     'no-unused-vars': ['off',], // favour typescript's no-unused-vars
     'no-undef': ['off',], // favour typescript
@@ -62,6 +61,11 @@ const config = {
     '@typescript-eslint/no-non-null-assertion': ['off',],
     '@typescript-eslint/no-this-alias': ['off',],
     '@typescript-eslint/no-empty-function': ['off',],
+    'import/no-commonjs': ['off',],
+    '@typescript-eslint/indent': ['error', 2, ],
+    '@typescript-eslint/no-explicit-any': ['off',],
+    '@typescript-eslint/no-namespace': ['off',],
+    '@typescript-eslint/no-empty-interface': ['off',],
   },
 };
 

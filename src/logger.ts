@@ -1,11 +1,10 @@
 /* eslint-disable no-sync */
+import { Writable } from 'node:stream';
+import { inspect } from 'node:util';
+import fs from 'node:fs';
 import 'winston-daily-rotate-file';
-import { Writable } from 'stream';
 import winston from 'winston';
-import fs from 'fs';
-import { DIR_LOGS } from './dir';
-import { Env } from './env';
-import { inspect } from 'util';
+import { Config } from './config.js';
 
 /**
  * Logger
@@ -22,7 +21,7 @@ import { inspect } from 'util';
 // https://medium.com/@helabenkhalfallah/nodejs-rest-api-with-express-passport-jwt-and-mongodb-98e5f2fee496
 
 // create log file if not exist
-const logDir = DIR_LOGS();
+const logDir = Config.DIR_LOGS;
 if (!fs.existsSync(logDir)) {
   fs.mkdirSync(logDir, { recursive: true, });
   if (!fs.existsSync(logDir)) {
@@ -31,6 +30,7 @@ if (!fs.existsSync(logDir)) {
 }
 
 const nocolorFormat = winston.format.combine(
+  winston.format.uncolorize(),
   winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss', }),
   winston.format.printf((info) => {
     const { timestamp, level, message, } = info;
@@ -62,10 +62,10 @@ export const logger = winston.createLogger({
       dirname: logDir,
       filename: '%DATE%.info.log',
       datePattern: 'YYYY-MM-DD',
-      zippedArchive: Env.LOGS_COMPRESS, // gzip
+      zippedArchive: Config.LOGS_COMPRESS, // gzip
       format: nocolorFormat,
-      maxSize: Env.LOGS_MAX_SIZE,
-      maxFiles: Env.LOGS_ROTATION_MAX_AGE,
+      maxSize: Config.LOGS_MAX_SIZE,
+      maxFiles: Config.LOGS_ROTATION_MAX_AGE,
       handleExceptions: false, // handle manually
     }),
 
@@ -75,10 +75,10 @@ export const logger = winston.createLogger({
       dirname: logDir,
       filename: '%DATE%.error.log',
       datePattern: 'YYYY-MM-DD',
-      zippedArchive: Env.LOGS_COMPRESS, // gzip
+      zippedArchive: Config.LOGS_COMPRESS, // gzip
       format: nocolorFormat,
-      maxSize: Env.LOGS_MAX_SIZE,
-      maxFiles: Env.LOGS_ROTATION_MAX_AGE,
+      maxSize: Config.LOGS_MAX_SIZE,
+      maxFiles: Config.LOGS_ROTATION_MAX_AGE,
       handleExceptions: false, // handle manually
     }),
 
@@ -96,7 +96,7 @@ export const logger = winston.createLogger({
  *
  * Anything written to this stream will be logged
  */
-export const LoggerStream = new Writable({
+export const loggerStream = new Writable({
   write(chunk: string | Buffer, _, done) {
     if (Buffer.isBuffer(chunk)) {
       // strip off morgan new lines...
@@ -129,32 +129,18 @@ function clean(str: string) {
  * @returns
  */
 export function unknownToString(unknown: unknown, color: boolean): string {
-  try {
-    switch (typeof unknown) {
-    case 'string':
-      return unknown;
+  switch (typeof unknown) {
+    case 'string': return unknown;
+    case 'undefined':
     case 'number':
-    case 'boolean':
+    case 'boolean': return String(unknown);
     case 'symbol':
     case 'bigint':
-    case 'undefined':
-      return String(unknown);
     case 'object':
     case 'function':
       if (unknown === null) return String(null);
-      return inspect(unknown, false, 10, color);
+      return inspect(unknown, false, Config.LOG_INSPECT_LEVEL, color);
     default:
-      return String(unknown);
-    }
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (err: any) {
-    try {
-      return String(unknown);
-    } catch (err2: unknown) {
-      if (err && typeof err.message === 'string') {
-        return `Error: failed to print object. ${err.message}`;
-      }
-      return 'Error: failed to print object';
-    }
+      return inspect(unknown, false, Config.LOG_INSPECT_LEVEL, color);
   }
 }

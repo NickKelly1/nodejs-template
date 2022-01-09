@@ -1,4 +1,4 @@
-import { logger } from './logger';
+import { logger } from './logger.js';
 
 let booted = false;
 
@@ -7,7 +7,7 @@ let booted = false;
  *
  * Hook into the NodeJS process to normalise behavior
  */
-export function boot(): void {
+export function init(): void {
   if (booted) return;
   booted = true;
 
